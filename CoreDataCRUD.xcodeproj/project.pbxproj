@@ -8,22 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		8DA5A20521E64E4000CEAD82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5A20421E64E4000CEAD82 /* AppDelegate.swift */; };
-		8DA5A20721E64E4000CEAD82 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5A20621E64E4000CEAD82 /* ViewController.swift */; };
+		8DA5A20721E64E4000CEAD82 /* StudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5A20621E64E4000CEAD82 /* StudentViewController.swift */; };
 		8DA5A20A21E64E4000CEAD82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DA5A20821E64E4000CEAD82 /* Main.storyboard */; };
 		8DA5A20D21E64E4000CEAD82 /* CoreDataCRUD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5A20B21E64E4000CEAD82 /* CoreDataCRUD.xcdatamodeld */; };
 		8DA5A20F21E64E4200CEAD82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DA5A20E21E64E4200CEAD82 /* Assets.xcassets */; };
 		8DA5A21221E64E4200CEAD82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DA5A21021E64E4200CEAD82 /* LaunchScreen.storyboard */; };
+		8DA5A21A21E652D600CEAD82 /* StudentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5A21921E652D600CEAD82 /* StudentPresenter.swift */; };
+		8DA5A21D21E6558500CEAD82 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5A21B21E6558500CEAD82 /* Person+CoreDataClass.swift */; };
+		8DA5A21E21E6558500CEAD82 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5A21C21E6558500CEAD82 /* Person+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8DA5A20121E64E4000CEAD82 /* CoreDataCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DA5A20421E64E4000CEAD82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8DA5A20621E64E4000CEAD82 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8DA5A20621E64E4000CEAD82 /* StudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewController.swift; sourceTree = "<group>"; };
 		8DA5A20921E64E4000CEAD82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8DA5A20C21E64E4000CEAD82 /* CoreDataCRUD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataCRUD.xcdatamodel; sourceTree = "<group>"; };
 		8DA5A20E21E64E4200CEAD82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DA5A21121E64E4200CEAD82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8DA5A21321E64E4200CEAD82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DA5A21921E652D600CEAD82 /* StudentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentPresenter.swift; sourceTree = "<group>"; };
+		8DA5A21B21E6558500CEAD82 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8DA5A21C21E6558500CEAD82 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,50 @@
 		8DA5A20321E64E4000CEAD82 /* CoreDataCRUD */ = {
 			isa = PBXGroup;
 			children = (
-				8DA5A20421E64E4000CEAD82 /* AppDelegate.swift */,
-				8DA5A20621E64E4000CEAD82 /* ViewController.swift */,
-				8DA5A20821E64E4000CEAD82 /* Main.storyboard */,
-				8DA5A20E21E64E4200CEAD82 /* Assets.xcassets */,
-				8DA5A21021E64E4200CEAD82 /* LaunchScreen.storyboard */,
+				8DA5A22421E65E2300CEAD82 /* Supporting Files */,
+				8DA5A22221E65E0800CEAD82 /* Storyboard */,
+				8DA5A22121E65DF800CEAD82 /* Student */,
+				8DA5A21F21E65DCA00CEAD82 /* Model */,
 				8DA5A21321E64E4200CEAD82 /* Info.plist */,
-				8DA5A20B21E64E4000CEAD82 /* CoreDataCRUD.xcdatamodeld */,
 			);
 			path = CoreDataCRUD;
+			sourceTree = "<group>";
+		};
+		8DA5A21F21E65DCA00CEAD82 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8DA5A20B21E64E4000CEAD82 /* CoreDataCRUD.xcdatamodeld */,
+				8DA5A21C21E6558500CEAD82 /* Person+CoreDataProperties.swift */,
+				8DA5A21B21E6558500CEAD82 /* Person+CoreDataClass.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8DA5A22121E65DF800CEAD82 /* Student */ = {
+			isa = PBXGroup;
+			children = (
+				8DA5A21921E652D600CEAD82 /* StudentPresenter.swift */,
+				8DA5A20621E64E4000CEAD82 /* StudentViewController.swift */,
+			);
+			path = Student;
+			sourceTree = "<group>";
+		};
+		8DA5A22221E65E0800CEAD82 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				8DA5A21021E64E4200CEAD82 /* LaunchScreen.storyboard */,
+				8DA5A20821E64E4000CEAD82 /* Main.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		8DA5A22421E65E2300CEAD82 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8DA5A20E21E64E4200CEAD82 /* Assets.xcassets */,
+				8DA5A20421E64E4000CEAD82 /* AppDelegate.swift */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +179,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DA5A21A21E652D600CEAD82 /* StudentPresenter.swift in Sources */,
 				8DA5A20D21E64E4000CEAD82 /* CoreDataCRUD.xcdatamodeld in Sources */,
-				8DA5A20721E64E4000CEAD82 /* ViewController.swift in Sources */,
+				8DA5A21E21E6558500CEAD82 /* Person+CoreDataProperties.swift in Sources */,
+				8DA5A21D21E6558500CEAD82 /* Person+CoreDataClass.swift in Sources */,
+				8DA5A20721E64E4000CEAD82 /* StudentViewController.swift in Sources */,
 				8DA5A20521E64E4000CEAD82 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

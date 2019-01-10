@@ -20,7 +20,10 @@ class StudentViewController: UIViewController {
     let alert = UIAlertController(title: "New Student", message: "Add a new student", preferredStyle: .alert)
     
     alert.addTextField(configurationHandler: { (textFieldName) in textFieldName.placeholder = "name" })
-    alert.addTextField(configurationHandler: { (textFieldId) in textFieldId.placeholder = "ID" })
+    alert.addTextField(configurationHandler: { (textFieldId) in
+      textFieldId.placeholder = "ID"
+      textFieldId.keyboardType = UIKeyboardType.numberPad
+    })
     
     let saveAction = UIAlertAction(title: "Save", style: .default) { [unowned self] action in
       
@@ -29,12 +32,13 @@ class StudentViewController: UIViewController {
           return
       }
       
-      guard let textFieldSSN = alert.textFields?[1],
-        let idToSave = textFieldSSN.text else {
+      guard let textFieldID = alert.textFields?[1],
+        let idToSave = textFieldID.text else {
           return
       }
+      alert.textFields?[1].keyboardType = UIKeyboardType.numberPad
       
-      self.save(name: nameToSave, id: Int16(idToSave) ?? 0)
+      self.save(name: nameToSave, id: Int16(idToSave)!)
       self.tableView.reloadData()
     }
     
@@ -124,15 +128,13 @@ class StudentViewController: UIViewController {
   }
 }
 
-extension StudentViewController: UITableViewDataSource, UITableViewDelegate {
+extension StudentViewController: UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
   
-  func tableView(_ tableView: UITableView,
-                 numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return people.count
   }
   
-  func tableView(_ tableView: UITableView,
-                 cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let person = people[indexPath.row]
     let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",
@@ -141,63 +143,69 @@ extension StudentViewController: UITableViewDataSource, UITableViewDelegate {
     return cell
   }
   
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+  func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?{
+    
     let person = people[indexPath.row]
-
+    
     let alert = UIAlertController(title: "Update Name",
                                   message: "Update Name",
                                   preferredStyle: .alert)
-
+    
     alert.addTextField(configurationHandler: { (textFieldName) in
-
+      
       textFieldName.placeholder = "name"
-
+      
       textFieldName.text = person.value(forKey: "name") as? String
       
     })
-
+  
     alert.addTextField(configurationHandler: { (textFieldID) in
-
+      
+      textFieldID.keyboardType = UIKeyboardType.numberPad
       textFieldID.placeholder = "ID"
-
       textFieldID.text = "\(person.value(forKey: "id") as? Int16 ?? 0)"
     })
-
-    let updateAction = UIAlertAction(title: "Update", style: .default) { [unowned self] action in
-      
-      guard let textField = alert.textFields?[0],
-        let nameToSave = textField.text else {
-          return
-      }
-      
-      guard let textFieldID = alert.textFields?[1],
-        let IDToSave = textFieldID.text else {
-          return
-      }
-      
-      self.update(name : nameToSave, id: Int16(IDToSave)!, person : person as! Person)
-      
-      self.tableView.reloadData()
-      
-    }
-
-    let deleteAction = UIAlertAction(title: "Delete", style: .default) { [unowned self] action in
-
+    
+    let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+      // delete item at indexPath
       self.delete(person : person as! Person)
       self.people.remove(at: (self.people.index(of: person))!)
       self.tableView.reloadData()
+    }
+    
+    let editAction = UITableViewRowAction(style: .default, title: "Edit") { (action, indexPath) in
+      
+      let updateAction = UIAlertAction(title: "Update", style: .default) { [unowned self] action in
+        
+        guard let textField = alert.textFields?[0],
+          let nameToSave = textField.text else {
+            return
+        }
+        
+        guard let textFieldID = alert.textFields?[1],
+          let IDToSave = textFieldID.text else {
+            return
+        }
+        
+        self.update(name : nameToSave, id: Int16(IDToSave)!, person : person as! Person)
+        
+        self.tableView.reloadData()
+        
+      }
+      
+      let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+      
+      alert.addAction(cancelAction)
+      alert.addAction(updateAction)
+      
+      self.present(alert, animated: true)
       
     }
     
-    let cancelAction = UIAlertAction(title: "Cancel",
-                                     style: .default)
-
-    alert.addAction(updateAction)
-    alert.addAction(cancelAction)
-    alert.addAction(deleteAction)
-    
-    present(alert, animated: true)
+    editAction.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+    deleteAction.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+    return [deleteAction, editAction]
     
   }
 }
+
